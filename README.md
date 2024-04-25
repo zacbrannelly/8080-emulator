@@ -4,9 +4,9 @@ This is a simple emulator for the Intel 8080 microprocessor. It is written in C+
 
 Currently, the emulator is able to run Space Invaders only. The ROM for Space Invaders is not included in this repository, but can be found online.
 
-<center>
-<img src="screenshot.png" alt="Screenshot" />
-</center>
+<p align="center">
+  <img src="screenshot.png" />
+</p>
 
 ## Prepare the ROM
 
