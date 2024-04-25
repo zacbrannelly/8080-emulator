@@ -145,12 +145,12 @@ int main(int argc, char* argv[]) {
     const auto now { std::chrono::high_resolution_clock::now() };
 
     // Basic event handling.
-		SDL_Event e;
-		if (SDL_PollEvent(&e)) {
-			if (e.type == SDL_QUIT)
-				break;
-			else if (e.type == SDL_KEYUP && e.key.keysym.sym == SDLK_ESCAPE)
-				break;
+    SDL_Event e;
+    if (SDL_PollEvent(&e)) {
+      if (e.type == SDL_QUIT)
+        break;
+      else if (e.type == SDL_KEYUP && e.key.keysym.sym == SDLK_ESCAPE)
+        break;
 
       if (e.type == SDL_KEYDOWN || e.type == SDL_KEYUP) {
         auto input_mask = input_map.find(e.key.keysym.sym);
@@ -160,7 +160,7 @@ int main(int argc, char* argv[]) {
             : cpu.input_ports[1] & ~input_mask->second;
         }
       }
-		}
+    }
 
     // Update frame buffer.
     for (int i = VIDEO_RAM_START; i < VIDEO_BUFFER_SIZE; i++) {
