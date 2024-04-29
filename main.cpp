@@ -9,8 +9,8 @@
 #include "cpu.h"
 
 constexpr auto SPACE_INVADERS_BIN = "space-invaders/invaders";
-constexpr auto WIDTH = 224 * 4;
-constexpr auto HEIGHT = 256 * 4;
+constexpr auto WIDTH = 224 * 2;
+constexpr auto HEIGHT = 256 * 2;
 
 constexpr auto VIDEO_RAM_START = 0x2400;
 constexpr auto FRAME_BUFFER_WIDTH = 256;
@@ -162,6 +162,11 @@ int main(int argc, char* argv[]) {
       }
     }
 
+    // Render only every 16ms.
+    if (std::chrono::duration_cast<std::chrono::milliseconds>(now - last_render_time).count() < 16) {
+      continue;
+    }
+
     // Update frame buffer.
     for (int i = VIDEO_RAM_START; i < VIDEO_BUFFER_SIZE; i++) {
       uint8_t video_byte = cpu.ram[i];
@@ -171,11 +176,6 @@ int main(int argc, char* argv[]) {
           ? 0xFF000000 
           : 0x00000000;
       }
-    }
-
-    // Render only every 16ms.
-    if (std::chrono::duration_cast<std::chrono::milliseconds>(now - last_render_time).count() < 16) {
-      continue;
     }
 
     // Update frame buffer texture.
